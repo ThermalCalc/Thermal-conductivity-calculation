@@ -1,23 +1,78 @@
-# Thermal-conductivity-calculation
-Calculation of effective thermal conductivity of complex compositions.
+# Thermal Conductivity Calculation
 
-The **Thermal Conductivity Calculation** method provides a numerical approach to accurately predict the effective thermal conductivity of polymer composites. This method considers various parameters, including the properties of the filler (thermal conductivity and particle size), the properties of the polymer (thermal conductivity), and the properties of the composite material (volume fraction of the filler and interfacial thermal resistance between the filler and the polymer).
+A numerical method for predicting the effective thermal conductivity of filler-filled polymer composites. This approach considers:
+- Filler properties (thermal conductivity, particle radius)
+- Polymer matrix properties (thermal conductivity)
+- Composite characteristics (filler volume fraction, interfacial thermal resistance)
 
-## Steps to Operate:
+## System Requirements
 
-1. **Run the PYTHON Software**:
-   - Open the PYTHON software and follow the instructions to open the web interface.
+### Python Environment
+- **Minimum**: Python 3.9+
 
-2. **Input Parameters**:
-   - Enter the required parameters directly into the provided fields and click the button to calculate the effective thermal conductivity.
+### Required Packages
+```bash
+pip install flask sympy joblib scipy numpy matplotlib pandas
+```
 
-3. **Batch Calculations for Multiple Data Sets**:
-   - For calculating multiple sets of data, create a `.txt` file with the following format:
-     - **First Column**: Volume fraction of the filler
-     - **Second Column**: Particle size of the filler
-     - **Third Column**: Thermal conductivity of the polymer
-     - **Fourth Column**: Thermal conductivity of the filler
-     - **Fifth Column**: Interfacial thermal resistance between the filler and the polymer
+## Installation
+1. Download the repository:
+   - Click the green "Code" button
+   - Select "Download ZIP"
+   - Save as `Thermal-conductivity-calculation-main.zip`
 
-4. **Interfacial Thermal Resistance Calculation**:
-   - The interfacial thermal resistance between the filler and the polymer can be calculated using either the EMT model or the BC model, depending on the requirements.
+Alternative direct download:
+```bash
+wget https://github.com/ThermalCalc/Thermal-conductivity-calculation/archive/refs/heads/main.zip
+```
+
+## Usage
+
+### Web Interface
+1. Run the server:
+   ```bash
+   python server.py
+   ```
+2. Access the interface at: `http://127.0.0.1:5000`
+
+### Calculation Modules
+
+#### 1. Single Dataset Calculation
+Enter parameters directly in the web form:
+- Filler properties
+- Polymer properties
+- Composite parameters
+
+#### 2. Batch Processing
+1. Prepare input file (`data.txt`):
+   ```
+   volume_fraction, particle_size, polymer_conductivity, filler_conductivity, interface_resistance
+   0.1, 1e-6, 0.2, 100, 1e-8
+   0.2, 1e-6, 0.2, 100, 1e-8
+   ```
+2. Upload via "Batch Data Set Calculation" module
+3. Results saved in `/results` directory
+
+#### 3. Interface Resistance Calculation
+Select model (EMT/BCC) and input:
+- Composite thermal conductivity
+- Constituent material properties
+- Filler characteristics
+
+## MATLAB Implementation
+The repository includes:
+- `Effective_Thermal_Conductivity_Calculation.m` script
+- Separate implementations for:
+  - Low-fill systems (Vf ≤ 13%)
+  - High-fill systems (13% < Vf ≤ 68%)
+
+### MATLAB Usage
+1. Prepare input file (`xx.data`) formatted as specified in lines 5-13
+2. Alternatively, modify parameters directly in the script
+3. Run to obtain:
+   - Predicted effective thermal conductivity
+   - Model validation against experimental data (if available)
+
+
+For detailed theoretical background, please refer to our [documentation](docs/theory.pdf).
+```
