@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation of Effective Thermal Conductivity</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculation of Effective Thermal Conductivity</h1>
+
+        <!-- Single Data Set Calculation -->
+        <section>
+            <h2>Single Data Set Calculation</h2>
+            <form id="single-form">
+                <label for="r">Size of particle (m):</label>
+                <input type="text" name="r" placeholder="r" required>
+                
+                <label for="Vf">Volume fraction:</label>
+                <input type="text" name="Vf" placeholder="Vf" required>
+
+                <label for="Kf">Thermal conductivity of filler (W/m·K):</label>
+                <input type="text" name="Kf" placeholder="Kf" required>
+
+                <label for="Km">Thermal conductivity of polymer metrix (W/m·K):</label>
+                <input type="text" name="Km" placeholder="Km" required>
+
+                <label for="Ri">Interfacial thermal resistance (W·m²/K):</label>
+                <input type="text" name="Ri" placeholder="Ri" required>
+
+                <button type="submit">Calculate</button>
+            </form>
+            <div id="single-result"></div>
+        </section>
+
+        <!-- Batch Data Set Calculation -->
+        <section>
+            <h2>Batch Data Set Calculation</h2>
+            <form id="multiple-form" enctype="multipart/form-data">
+                <label for="file">Click to upload the data file (including the above parameters, separated by ',' (.txt):</label>
+                <input type="file" id="file" name="file" accept=".txt" required style="display: none;">
+                
+                <button type="submit">Calculate</button>
+            </form>
+            <div id="multiple-result"></div>
+        </section>
+
+	<!-- Navigate to Interface Resistance Calculation -->
+        <section>
+            <h2>Interface Thermal Resistance Calculation</h2>
+	    <p>Click the button below to navigate to the interface thermal resistance calculation page.</p>
+            <a href="/interface-resistance"  class="btn">Go to Interface Resistance Calculation</a>
+        </section>
+    </div>
+    <script src="/static/Script.js"></script>
+</body>
+</html>

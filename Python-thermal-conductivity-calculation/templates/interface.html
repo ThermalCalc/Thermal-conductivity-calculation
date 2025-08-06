@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Interface Resistance</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculate Interface Resistance</h1>
+
+        <!-- Interface Resistance Calculation Form -->
+        <section>
+            <h2>Enter the parameters to calculate Interface Resistance</h2>
+            <form id="interface-form">
+                <label for="Ka">Thermal conductivity of material (Ka):</label>
+                <input type="text" name="Ka" id="Ka" placeholder="Enter Ka" required>
+                
+                <label for="Vf">Volume fraction (Vf):</label>
+                <input type="text" name="Vf" id="Vf" placeholder="Enter Vf" required>
+
+                <label for="Kf">Thermal conductivity of filler (Kf):</label>
+                <input type="text" name="Kf" id="Kf" placeholder="Enter Kf" required>
+
+                <label for="Km">Thermal conductivity of matrix (Km):</label>
+                <input type="text" name="Km" id="Km" placeholder="Enter Km" required>
+
+                <label for="r">Particle radius (r):</label>
+                <input type="text" name="r" id="r" placeholder="Enter r" required>
+
+                <label for="model">Select model:</label>
+                <select name="model" id="model">
+                    <option value="emt">EMT model</option>
+                    <option value="bc">BCC model</option>
+                </select>
+
+                <button type="submit">Calculate</button>
+            </form>
+        </section>
+
+        <!-- Results Display Area -->
+        <div id="interface-result"></div>
+    </div>
+
+    <!-- JavaScript for handling form submission and displaying results -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Handle form submission
+            document.getElementById('interface-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Prepare form data
+                const formData = new FormData(e.target);
+                const data = {
+                    Ka: formData.get('Ka'),
+                    Vf: formData.get('Vf'),
+                    Kf: formData.get('Kf'),
+                    Km: formData.get('Km'),
+                    r: formData.get('r'),
+                    model: formData.get('model')
+                };
+
+                try {
+                    // Send data to server for calculation
+                    const response = await fetch('/calculate-interface', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    // Check if response is successful
+                    if (response.ok) {
+                        const result = await response.json();
+                        document.getElementById('interface-result').innerHTML = `
+                            <h3>Calculation Result</h3>
+                            <p>${JSON.stringify(result)}</p>
+                        `;
+                    } else {
+                        document.getElementById('interface-result').innerHTML = `
+                            <h3>Error: Could not calculate interface resistance</h3>
+                        `;
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    document.getElementById('interface-result').innerHTML = `
+                        <h3>Unexpected Error: ${error.message}</h3>
+                    `;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
