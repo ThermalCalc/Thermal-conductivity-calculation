@@ -144,7 +144,7 @@ def calculate_keff_low_Vf(r, Vf, Kf, Km, Ri):
         Re = float(1 / (1 / (2 * R1 + R2 + 2 * RI) + 1 / R4))
 
         # Calculate the effective thermal conductivity, Keff.
-        Keff = float( l / l ** 2 /2/ Re)
+        Keff = float( l / l ** 2 / Re)
         return {"Keff": Keff}
     except Exception as e:
         print(f"Error during calculation: {e}")
@@ -281,7 +281,7 @@ def calculate_keff_high_Vf(r, Vf, Kf, Km, Ri):
         Re = float(1 / (1 / (2 * R1 + R2 + 2 * RI) + 1 / R4))
 
         # Calculate the effective thermal conductivity, Keff.
-        Keff = float( l / l ** 2 /2/ Re)
+        Keff = float( l / l ** 2 / Re)
         
         return {"Keff": Keff}
 
