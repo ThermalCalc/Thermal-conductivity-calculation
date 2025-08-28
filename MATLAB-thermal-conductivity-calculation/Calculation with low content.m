@@ -3,7 +3,7 @@ clear
 clc
 
 % Import datas
-data_file_path = 'xxx';
+data = dlmread('xxxx');%'xxxx' is the data-fill-path
 r = data(:,2)/2; % r (m)
 Vf = data(:,1); % Vf
 Kf = data(:,4); % Kf (W/m K)
@@ -110,4 +110,5 @@ mean_error = mean(errors);
 disp('Error between each K0 and Keff:');
 disp(errors);
 disp('Overall average error:');
+
 disp(mean_error);
